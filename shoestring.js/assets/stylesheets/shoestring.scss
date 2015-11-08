@@ -1,0 +1,97 @@
+@import "normalize";
+@import "modern-business";
+@import 'media-queries';
+body {
+  padding-top: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+.section, .section-colored {
+  margin: 0;
+}
+
+.row {
+  padding: 50px 75px;
+}
+
+.row::after, .row::before{
+  clear: both;
+  display: block;
+  content: '';
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+ol {
+  background-color: #F0F0F0;
+}
+ol.breadcrumb {
+  li + li:before{
+    content: '/';
+  }
+  li {
+  display: inline;
+  }
+  text-align: left;
+}
+
+h1.page-header {
+  margin-top: 0;
+  font-size: 16pt;
+  text-align: left;
+  small {
+    color: #999;
+  }
+}
+
+
+
+
+
+.navbar {
+  background-color: black;
+  padding: 15px 100px;
+  height: 20px;
+  .navbar-header {
+    display: inline;
+    float: left;
+  }
+  a {
+    color: #AAA;
+  }
+  ul {
+    margin: 0;
+    display: inline;
+    list-style: none;
+  }
+  li {
+    display: inline;
+  }
+  .navbar-right {
+    float: right;
+  }
+}
+
+
+
+.img-responsive {
+  width: 100%;
+}
+
+hr {
+  width: 100%;
+  border: 1px solid #F0F0F0;
+}
+
+.lead {
+  padding: 0;
+}

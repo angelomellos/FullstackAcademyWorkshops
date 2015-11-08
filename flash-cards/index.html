@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Flash Cards</title>
+        <!-- We've provided some styles for you, aren't we nice? -->
+        <link rel="stylesheet" type="text/css" href="/css/reset.css" />
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    </head>
+
+
+    <body>
+
+        <div ng-app="flashCards">
+            <div ng-controller="StatsController" id="statistics">
+
+                <div id="scoreboard">
+                    <h3>Correct: <span>{{ scores.correct }}</span></h3>
+                    <h3>Incorrect: <span>{{ scores.incorrect }}</span></h3>
+                </div>
+
+            </div>
+            <div ng-controller="MainController">
+
+              <div ng-repeat="category in categories">
+                <button class="category-button" ng-class="{active: category===chosenCategory}" ng-click="getCategoryCards(category)">{{category}}</button>
+              </div>
+              <div>
+                <button class="category-button" ng-click="getFlashCards()">Reset</button>
+              </div>
+              <loader ng-show="isLoading"></loader>
+              <flashcard ng-repeat='flashCard in flashCards'  card="flashCard" ></flashcard>
+
+    	</div>
+    	<script src="/js/lib/angular.js"></script>
+    	<script src="/js/factories/app.js"></script>
+    	<script src="/js/controllers/main.controller.js"></script>
+        <script src="/js/controllers/stats.controller.js"></script>
+        <script src="/js/directives/loader/loader.js"></script>
+        <script src="/js/directives/flash-card/flash-cards.js"></script>
+    </div>
+    </body>
+</html>

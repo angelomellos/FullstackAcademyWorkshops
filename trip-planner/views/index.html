@@ -1,0 +1,86 @@
+<html>
+<head>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+<link href="/bower_components/jquery/dist/jquery.css" rel="stylesheet">
+<link href="/stylesheets/trip-planner.css" rel="stylesheet">
+
+</head>
+<body>
+  <div class='container'>
+    <div class='row'>
+      <div class='col-lg-6 planner'>
+
+        <nav class="navbar navbar-blue" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <font face = 'comic sans'>
+            <a class="navbar-brand page-title" href="/">Trip Planner</a>
+             <a class="navbar-brand" href="/">Hotels</a>
+             <a class="navbar-brand navbar-highlight" href="/">Restaurants</a>
+             <a class="navbar-brand" href="/">Activities</a>
+             </font>
+           </div>
+         </div>
+       </nav>
+
+        <div class= 'filters'>
+          <p>Eat in New York City</p>
+          <select>
+          <option value="volvo">--select neighborhood--</option>
+           <option value="volvo">Financial District</option>
+           <option value="saab">Brooklyn</option>
+           <option value="mercedes">Lower East Side</option>
+           <option value="audi">Chinatown</option>
+          </select>
+          <select>
+          <option value="volvo">--cuisine--</option>
+           <option value="volvo">Chinese</option>
+           <option value="saab">Indian</option>
+           <option value="mercedes">Italian</option>
+           <option value="audi">Greek</option>
+          </select>
+          <select>
+          <option value="volvo">--select price range--</option>
+           <option value="volvo">$</option>
+           <option value="saab">$$</option>
+           <option value="mercedes">$$$</option>
+           <option value="audi">$$$$</option>
+          </select>
+        </div>
+      <br><br>
+      <div class = 'results'>
+        {% for hotel in hotels %}
+          {%if hotels.indexOf(hotel)%3===0%}
+            <div class = 'row'>
+          {%endif%}
+          <div class = 'col-lg-4'>
+            <font face = 'comic sans'>{{hotel.name}}</font>
+            {{hotel.place.city}}
+            <img src ='{{hotel.picUrl}}' width = '150px' height = '150px' class='photo'></img>
+          </div>
+          {%if hotels.indexOf(hotel)%3===2%}
+        </div><br>
+          {%endif%}
+        {% endfor %}
+      </div>
+
+
+      <div class='row calendar'>
+        <div class='col-lg-3 day'><u>Day 1</u>
+        <br>
+        Tamarind</div>
+        <div class='col-lg-3 day'><u>Day 2</u></div>
+        <div class='col-lg-3 day'><u>Day 3</u></div>
+        <div class='col-lg-3 day'><u>Day 4</u></div>
+      </div>
+
+
+
+
+    </div>
+      <div class='col-lg-6 map'><img width ='100%' src='/images/Google_map-6.png'></img> </div>
+
+  </div>
+</div>
+</body>
+</html>

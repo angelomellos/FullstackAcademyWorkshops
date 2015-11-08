@@ -1,0 +1,207 @@
+ {% extends 'layout.html' %}
+
+{% block title %}Your Trip{% endblock %}
+
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src='layout.html'></script>
+
+<div id="app" class="clearfix">
+  <div class="map-container col-sm-8 col-lg-9">
+    <div>
+      <div id="map-canvas"></div>
+    </div>
+  </div>
+  <div id="control-panel" class="col-sm-4 col-lg-3 clearfix">
+    <div class="col-xs-6 col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div>
+            <h4>Hotels</h4>
+            <select class='hotel-select'>
+              {% for hotel in all_hotels %}
+              <option>{{ hotel.name }}</option>
+              {% endfor %}
+            </select>
+            <button class="btn btn-hotel btn-primary btn-circle pull-right">+</button>
+          </div>
+          <div>
+            <h4>Restaurants</h4>
+            <select class='restaurant-select'>
+              {% for restaurant in all_restaurants %}
+              <option>{{ restaurant.name }}</option>
+              {% endfor %}
+            </select>
+            <button class="btn btn-restaurant btn-primary btn-circle pull-right">+</button>
+          </div>
+          <div>
+            <h4>Activities</h4>
+            <select class='activity-select'>
+              {% for activity in all_activities %}
+              <option>{{ activity.name }}</option>
+              {% endfor %}
+            </select>
+            <button class="btn btn-activity btn-primary btn-circle pull-right">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-12">
+      <h3>
+        <span id="day-title">
+          <span class='day-label'>Day 2</span>
+          <button class="btn btn-xs btn-danger remove btn-circle btn-danger-all">x</button>
+        </span>
+      </h3>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="day-buttons">
+            <button class="btn btn-circle day-btn">1</button>
+            <button class="btn btn-circle day-btn">2</button>
+            <button class="btn btn-circle day-btn">3</button>
+            <button class="btn btn-circle day-plus">+</button>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div>
+            <h4>My Hotel</h4>
+            <ul class="list-group list-group-hotel">
+              <!-- <div class="itinerary-item">
+                <span class="title">Andaz Wall Street</span>
+                <button class="btn btn-xs btn-danger remove btn-circle">x</button>
+              </div> -->
+            </ul>
+          </div>
+          <div>
+            <h4>My Restaurants</h4>
+            <ul class="list-group list-group-restaurant">
+              <!-- <div class="itinerary-item">
+                <span class="title">Bouley</span>
+                <button class="btn btn-xs btn-danger remove btn-circle">x</button>
+              </div> -->
+            </ul>
+          </div>
+          <div>
+            <h4>My Activities</h4>
+            <ul class="list-group list-group-activity">
+              <!-- <div class="itinerary-item">
+                <span class="title">Mahayana Buddhist Temple Association</span>
+                <button class="btn btn-xs btn-danger remove btn-circle">x</button>
+              </div> -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var listed = [];
+function addToList () {
+  listed.push({hotel: [],restaurant:[],activity:[]});
+}
+addToList();
+addToList();
+addToList();
+$(".panel-body .btn").click(function() {
+  if( $(this).hasClass('btn-hotel') ) {
+    var hotelIndex = $('.hotel-select').prop("selectedIndex");
+    $('.list-group-hotel').append( '<span id="' + all_hotels[hotelIndex].name.replace(/[\s&]/g,'') + '">' + all_hotels[hotelIndex].name + '</span>' +
+      '<button data-attribute="' + all_hotels[hotelIndex].name + '" class="btn btn-xs btn-danger remove btn-circle btn-danger-item">x</button>' + "<br>" );
+    removeItemClick();
+    listed[$('.day-label').html().split(' ')[1]-1].hotel.push(all_hotels[hotelIndex].name);
+  }
+
+  else if( $(this).hasClass( 'btn-restaurant') ){
+    var restaurantIndex = $('.restaurant-select').prop("selectedIndex");
+    $('.list-group-restaurant').append( '<span id="' + all_restaurants[restaurantIndex].name.replace(/[\s&]/g,'') + '">' + all_restaurants[restaurantIndex].name + '</span>' +
+      '<button data-attribute="' + all_restaurants[restaurantIndex].name + '"class="btn btn-xs btn-danger remove btn-circle btn-danger-item">x</button>' + "<br>" );
+    removeItemClick();
+    listed[$('.day-label').html().split(' ')[1]-1].restaurant.push(all_restaurants[restaurantIndex].name);
+    console.log(all_restaurants[0].place[0].location);
+    restaurantLocations.push(all_restaurants[0].place[0].location);
+    drawLocation(restaurantLocations);
+  }
+
+  else if( $(this).hasClass( 'btn-activity') ){
+    var activityIndex = $('.activity-select').prop("selectedIndex");
+    $('.list-group-activity').append( '<span id="' + all_activities[activityIndex].name.replace(/[\s&]/g,'') + '">' + all_activities[activityIndex].name + '</span>' +
+      '<button data-attribute="' + all_activities[activityIndex].name + '"class="btn btn-xs btn-danger remove btn-circle btn-danger-item">x</button>' + "<br>" );
+    removeItemClick();
+    listed[$('.day-label').html().split(' ')[1]-1].activity.push(all_activities[activityIndex].name);
+  };
+
+
+});
+
+
+function dayButtonClick(){
+  $('.day-btn').click(function(){
+    console.log($(this).html());
+    $('.day-label').text('Day '+ $(this).html())
+    $('.list-group').empty();
+    var dayPlan = listed[$(this).html()-1];
+    for (var key in dayPlan){
+      dayPlan[key].forEach(function(plan){
+        console.log($('.' + key + '-select'));
+        $('.list-group-' + key).append(plan + '<br>');
+      })
+    }
+  })
+}
+dayButtonClick();
+
+
+$('.day-plus').click(function appendButton(){
+  console.log(listed.length);
+  $(this).parent()
+  .append('<button class="btn btn-circle day-btn">'+ parseInt(listed.length+1) +'</button>')
+  .append('<button class="btn btn-circle day-plus">+</button>')
+  $(this).remove();
+  $('.day-plus').click(appendButton);
+  addToList();
+  dayButtonClick();
+})
+
+$('.btn-danger-all').click(function () {
+  listed[$('.day-label').html().split(' ')[1]-1] = {hotel: [],restaurant:[],activity:[]};
+  $('.list-group').empty();
+})
+
+function removeItemClick() {
+  $('.btn-danger-item').click(function () {
+    var self = this;
+    listed.forEach(function(list){
+      for (var key in list){
+        list[key].forEach(function(plan){
+          if (plan === $(self).data().attribute){
+            list[key].splice(list[key].indexOf(plan),1);
+            $(self).remove();
+            $('#' + plan.replace(/[\s&]/g,'')).remove();
+            console.log(plan.replace(/\s&/g,''));
+          }
+        })
+      }
+    })
+    //need to find in the array 'listed' the item that we want to remove
+
+    // console.log($(this).parent());
+    // listed[$('.day-label').html().split(' ')[1]-1];
+    // console.log($(this).parent().split('-')[-1]);
+    // $('.list-group').empty();
+  })
+};
+
+</script>
+
+<script>
+  {% autoescape false %}
+  var all_hotels = {{ all_hotels | json }};
+  var all_restaurants = {{ all_restaurants | json }};
+  var all_activities = {{ all_activities | json }};
+  {% endautoescape %}
+</script>
+
+
+{% endblock %}

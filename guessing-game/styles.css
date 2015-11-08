@@ -1,0 +1,31 @@
+
+body {
+    background-image: url("numbg.jpg");
+    background-size: 100% 100%;
+    background-size: 100% 100%;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  }
+
+@font-face {
+   font-family: hotFont;
+   src: url('fonts/BAILEYSC.TTF');
+}
+
+@font-face {
+   font-family: coldFont;
+   src: url('fonts/almosnow.ttf');
+}
+
+@font-face {
+   font-family: keys;
+   src: url('fonts/brushed.ttf');
+}
+
+.hot {
+    font-family: hotFont;
+    color: red;
+}
+
+.cold {
+   font-family: coldFont;
+   color: blue;
+}

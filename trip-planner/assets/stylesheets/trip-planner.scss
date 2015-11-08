@@ -1,0 +1,61 @@
+.page-title{
+  font-size: 30px;
+  font-family: "Copperplate"
+}
+
+.map{
+  padding: 0px;
+}
+
+.navbar{
+  padding-left:25px;
+  border-radius: 0px !important;
+}
+
+.navbar-blue{
+  background-image: url('/images/earth_lights_lrg.jpg');
+}
+
+.navbar-highlight{
+  color: orange !important;
+  font-style: bold !important;
+}
+
+.planner{
+  padding-left: 15px;
+}
+
+.container{
+  margin-left: 0px !important;
+  margin-right: -20px !important;
+  padding: 0px !important;
+}
+
+.photo{
+  border-radius: 10px;
+}
+
+.calendar{
+  //position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin: 0;
+  height:20%;
+
+  .day{
+    font-family: 'Comic Sans MS';
+    height: 120px;
+    border-style: solid;
+    border-width: 2px;
+    background-image: url('/images/notepad.jpg');
+  }
+}
+.results {
+  height: 70%;
+  overflow-y: scroll;
+  height: 420px;
+  padding-left: 25px;
+}
+.filters{
+  padding-left: 25px;
+}

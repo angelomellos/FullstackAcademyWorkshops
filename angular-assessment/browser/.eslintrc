@@ -1,0 +1,26 @@
+{
+  "extends": "eslint:recommended",
+  "env" : {
+    "browser": true,
+    "mocha": true
+  },
+  "globals": {
+    "angular": true,
+    "app": true
+  },
+  "rules": {
+    "no-use-before-define": [1, "nofunc"],
+    "no-unused-vars": 1,
+    "quotes": [1, "single", "avoid-escape"],
+    "curly": [1, "multi-line"],
+    "comma-spacing": 1,
+    "no-multi-spaces": 1,
+    "no-trailing-spaces": 1,
+    "eol-last": 1,
+    "semi": 1,
+    "eqeqeq": 1,
+    "key-spacing": [0, {"align": "value"}],
+    "no-underscore-dangle": 0,
+    "consistent-return": 0
+  }
+}

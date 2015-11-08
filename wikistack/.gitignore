@@ -1,0 +1,15 @@
+<<<<<<< HEAD
+node_modules/
+
+=======
+node_modules
+public
+.tmp
+.sass-cache
+.idea
+client/bower_components
+dist
+/server/config/local.env.js
+.DS_Store
+npm-debug.log
+>>>>>>> df6c43923cdac76bcdbdd968e5e254b76ebee5c9

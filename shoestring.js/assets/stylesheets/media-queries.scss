@@ -1,0 +1,57 @@
+
+
+    /* Small Devices, Tablets */
+    @media only screen and (max-width : 768px) {
+      .col-sm-4 {
+        box-sizing: border-box;
+        padding: 0 20px;
+        width: 33%;
+        float: left;
+      }
+      .col-sm-12 {
+        margin: 0 auto;
+        text-align: center;
+      }
+      body {
+        background-color: red;
+      }
+    }
+
+    /* Medium Devices, Desktops */
+    @media only screen and (max-width : 991px) and (min-width : 769px) {
+      .col-md-6 {
+        box-sizing: border-box;
+        padding: 0 20px;
+        width: 50%;
+        float: left;
+      }
+      .col-md-12 {
+        margin: 0 auto;
+        text-align: center;
+      }
+      body {
+        background-color: green;
+      }
+    }
+
+    /* Large Devices, Wide Screens */
+    @media only screen and (min-width : 992px) {
+
+
+      .col-lg-12 {
+        margin: 0 auto;
+        text-align: center;
+      }
+      .col-lg-6 {
+        box-sizing: border-box;
+        padding: 0 20px;
+        width: 50%;
+        float: left;
+      }
+      .col-lg-4 {
+        box-sizing: border-box;
+        padding: 0 20px;
+        width: 33%;
+        float: left;
+      }
+    }
