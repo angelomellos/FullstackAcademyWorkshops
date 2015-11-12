@@ -1,1 +1,1 @@
-These were done as a part of the epic curriculum at Fullstack Academy.
+Some of the work done at Fullstack Academy.
